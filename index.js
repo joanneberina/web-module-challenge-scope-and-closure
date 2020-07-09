@@ -119,7 +119,7 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function getInningScore(awayTeam, homeTeam, inning) {
+function getInningScore(awayTeam, homeTeam, inning) { //There's no details on what getInningScore should be doing so I just console logged the score.
   console.log(`Inning ${inning}: Away ${awayTeam} - Home ${homeTeam}`);
 }
 
