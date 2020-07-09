@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+> Closure is where a global variable is accessible from inside a function but an inner variable is not accessible from outside. A closure has a function as a return value.
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +64,13 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+> personalDice is a closure because it returns a function
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+> The name 'Dan' stays the same but the value of newRoll changes.
+
 c. What is the lexical scope of `newRoll`? 
+> The function returned by the function personalDice is the lexical scope.
 
 ### Task 2c - Exit Ticket
 

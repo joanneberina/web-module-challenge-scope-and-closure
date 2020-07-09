@@ -27,11 +27,14 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ * In counter 1, the variable count is inside the counterMaker scope so you can't easily access it from outside the function.
+ * In counter 2, the variable count is global and can be acccessed anytime.
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ * counter1 is a closure because it returns a function.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ * If you want to be able to access the count variable anywhere, don't use the closure (counter1)
 */
 
 // counter1 code
@@ -56,11 +59,15 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  min = 0;
+  max = 3; //up to but not including 3
+  score = Math.floor(Math.random() * (max - min)) + min; //returns a random integer between the specified values. The value is no lower than min (or the next integer greater than min if min isn't an integer), and is less than (but not equal to) max.
+  return score;
 }
+let teamscore = inning(); //assigns the random score (from the function) to the variable
+console.log(teamscore);
+
 
 /* Task 3: finalScore()
 
@@ -76,11 +83,20 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(callback, numberOfInnings){ //Callback Function is a function that is passed as a parameter to another JavaScript function, and the callback function is run inside of the function it was passed into.
+  let home = 0; //initialize the variables to contain the scores starting at 0.
+  let away = 0;
+  for (i=0; i < numberOfInnings; i++) { //loop the number of innings
+    home = home + callback();//add the existing score to a new random score
+    away = away + callback();
+  }
+  return { //create an object to show scores for Home and Away.
+    "Home": home,
+    "Away": away,
+  }
 }
+
+console.log(finalScore(inning, 9))
 
 /* Task 4: 
 
@@ -103,8 +119,22 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function getInningScore(awayTeam, homeTeam, inning) { //There's no details on what getInningScore should be doing so I just console logged the score.
+  console.log(`Inning ${inning}: Away ${awayTeam} - Home ${homeTeam}`);
 }
 
+
+function scoreboard(getInningScore, inning, numberOfInnings) {
+  let home = 0; //initialize the variables to contain the scores starting at 0.
+  let away = 0;
+  for (i=0; i < numberOfInnings; i++) { //loop the number of innings
+    home = home + inning();//add the existing score to a new random score
+    away = away + inning();
+    getInningScore(away, home, i+1)//run getInningScore callback function with current scores and inning.
+    //i starts at 0 but innings start at 1 so have to add 1 to i.
+  }
+  console.log(`Final Score: Away ${away} - Home ${home}`);
+}
+
+scoreboard(getInningScore, inning, 9);
 
