@@ -119,9 +119,22 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(getInningScore, inning, numberOfInnings) {
-  
-  
+function getInningScore(awayTeam, homeTeam, inning) {
+  console.log(`Inning ${inning}: Away ${awayTeam} - Home ${homeTeam}`);
 }
 
+
+function scoreboard(getInningScore, inning, numberOfInnings) {
+  let home = 0; //initialize the variables to contain the scores starting at 0.
+  let away = 0;
+  for (i=0; i < numberOfInnings; i++) { //loop the number of innings
+    home = home + inning();//add the existing score to a new random score
+    away = away + inning();
+    getInningScore(away, home, i+1)//run getInningScore callback function with current scores and inning.
+    //i starts at 0 but innings start at 1 so have to add 1 to i.
+  }
+  console.log(`Final Score: Away ${away} - Home ${home}`);
+}
+
+scoreboard(getInningScore, inning, 9);
 
